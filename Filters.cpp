@@ -99,34 +99,6 @@ void Mergeimage(){
 
 
 }
-/*void makethephotoblackandwhite(){
-    for ( int x = 0 ; x < SIZE ; x++ ) {
-            for ( int y = 0 ; y < SIZE ; y++ ) {
-                unsigned char r = image[x][y][0];
-                unsigned char g = image[x][y][1];
-                unsigned char b = image[x][y][2];
-                new_image[x][y] = (unsigned char)(.299*r + .587*g + .114*b);
-            }
-        }
-    for(int i = 0 ;i < SIZE ; i++){//nested loop will iterate the 2d array (rows and columns)
-        for(int j = 0 ; j < SIZE ; j++){
-             
-                if (new_image[i][j]>127)
-                    new_image[i][j] =255 ; //make it black 
-                else
-                    new_image[i][j] =0;    //make it white
-            }
-        
-
-    }
-char svimg [100];
-cout << "Enter new image name : ";
-cin >> svimg;
-strcat(svimg, ".bmp");
-writeGSBMP(svimg, image);
-
-}
-*/
 void makethephotoblackandwhite(){
     for ( int k = 0 ; k < SIZE ; k++ ) {
             for ( int l = 0 ; l < SIZE ; l++ ) {
