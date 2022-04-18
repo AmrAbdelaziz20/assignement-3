@@ -88,6 +88,19 @@ void mirror_the_left_half_from_image(){
     
 }
 }
+void detect_image_edges(){//function to detect the image after make the photo black and white
+    for(int i=0 ; i<SIZE ;i++){
+        for(int j=0 ;j<SIZE ;j++){
+            if (new_image[i][j]!= new_image[i+1][j+1]){// if two pixels are after each other havenot the same color it will be white  
+                new_image[i][j]=0;
+            }
+            else if(new_image[i][j] == new_image[i+1][j+1]){// if two pixels are after each other havenot the same color it will be black 
+                new_image[i][j]=255;
+            
+        }
+    }
+}
+}
 void makethephotoblackandwhite(){
     for ( int k = 0 ; k < SIZE ; k++ ) {
             for ( int l = 0 ; l < SIZE ; l++ ) {
@@ -141,7 +154,7 @@ for (int k = 0; k < (SIZE/2);k++){
 
 int main(){
     int  choose ;
-    str choice ;
+    string choice ;
     cout<<"1- Black & White Filter"
     <<endl<<"2- Invert Filter"
     <<endl<<"3- Merge Filter"
@@ -161,21 +174,27 @@ int main(){
     loadImage();
     if (choice == "1" ){
         makethephotoblackandwhite();
-        saveimage_for_black_and_white()
+        saveimage_for_black_and_white();
     }
     else if (choice == "4" ){
         cout<<"if you want to flip image horizantally choose 1 or  if you want to flip image vertically choose 2: ";
         cin>>choose;
-        if (choose == 1 )
+        if (choose == 1 ){
             flippping_image_horizantally();
             saveImage();
-        else if (choose == 2)
+        }
+        else if (choose == 2){
             flippping_image_vertically();
             saveImage();
+        }
+    }
+    else if (choice == "7" ){
+        makethephotoblackandwhite();
+        detect_image_edges();
+        saveimage_for_black_and_white();
     }
     
-    
-    else if (choice == "a")
+    else if (choice == "a"){
         cout<<"if you want to mirror image lower half choose 1 or if you want to mirror upper half image choose 2 or if you want to mirror right half image choose 3 or if you want to mirror left half image choose 4: ";
         cin>>choose;
         if (choose == 1){
@@ -194,7 +213,7 @@ int main(){
             mirror_the_left_half_from_image();
             saveImage();
         }
-    
+    }
     return 0;
 
 
