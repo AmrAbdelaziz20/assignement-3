@@ -1,4 +1,13 @@
+/*
+programming 1
+assignement 3
+name : Amr Abdelaziz Farrag             Id:202102777
 
+
+
+
+
+*/
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -9,7 +18,6 @@
 
 using namespace std;
 unsigned char image[SIZE][SIZE][RGB];
-unsigned char image2 [SIZE][SIZE][RGB];
 unsigned char new_image[SIZE][SIZE];
 void loadImage(){
     char img[100];
@@ -80,25 +88,6 @@ void mirror_the_left_half_from_image(){
     
 }
 }
-void Mergeimage(){
-    // image 2 for merging
-    char img2[100];
-    cout << "Enter image to merge : ";
-    cin >> img2;
-    //combine with .bmp
-    strcat(img2, ".bmp");
-    readRGBBMP(img2, image2);
-
-    for (int i = 0 ; i < SIZE ; i++){
-        for (int j = 0 ; j < SIZE ; j++){
-            for (int n = 0 ; n < RGB ; n++){
-               image[i][j][n] = (image[i][j][n] + image2[i][j][n]) / 2;
-            }
-        }
-    }
-
-
-}
 void makethephotoblackandwhite(){
     for ( int k = 0 ; k < SIZE ; k++ ) {
             for ( int l = 0 ; l < SIZE ; l++ ) {
@@ -149,98 +138,63 @@ for (int k = 0; k < (SIZE/2);k++){
         }
 }
 }
-void DarkenandLighten(){
-    int choice2;
-    cout << "1. Lighten image" << endl << "2. Darken image" << endl;
-    cin >> choice2;
-    if (choice2 == 1){
-        for (int i = 0 ; i < SIZE ; i++){
-            for (int j = 0 ; j < SIZE ; j++){
-                for (int n = 0 ; n < RGB ; n++){
-                  image[i][j][n] =  image[i][j][n] + ((255 - image[i][j][n])) / 2;
-                }
-            }
-        }
 
-    }else if (choice2 == 2){
-        for (int i = 0 ; i < SIZE ; i++){
-            for (int j = 0 ; j < SIZE ; j++){
-                //image[i][j] = image[i][j] / 2;
-            }
-        }
-    }
-}
-void ShrinkImage(){
-    int l = 0 , f = 0;
-    int vshrink, result;
-
-    cout << "1. 1/4 --> shrink value = 4" << endl;
-    cout << "2. 1/2 --> shrink value = 2" << endl;
-    cout << "3. 1/3 --> shrink value = 3" << endl;
-    cout << endl;
-
-    cout << "enter shrink amount : ";
-    cin >> vshrink;
-
-    result = SIZE / vshrink;
-    for (int i = 0 ; i < result ; i++){
-        for (int j = 0 ; j < result ; j++){
-            for (int n = 0 ; n < RGB ; n++){
-                image[i][j][n] = image[l][f][n];
-                f = f + vshrink;
-            }
-        }
-        f = 1;
-        l = l + vshrink;
-}
-}
-void BlurImage(){
-    for (int i = 0 ; i < SIZE ; i++){
-        for (int j = 0 ; j < SIZE ; j++){
-            for (int n = 0 ; n < RGB ; n++){
-                image[i][j][n] = (image[i][j][n] + image[i+1][j][n] + image[i][j+1][n] + image[i+1][j+1][n] + image[i-1][j][n] + image[i][j-1][n] + image[i-1][j-1][n] + image[i+2][j][n] + image[i][j+2][n] + image[i+2][j+2][n] + image[i-2][j][n] + image[i][j-2][n] + image[i-2][j-2][n] + image[i+3][j][n] + image[i][j+3][n] + image[i+3][j+3][n] + image[i-3][j][n] + image[i][j-3][n] + image[i-3][j-3][n]) / 19;
-            }
-
-        }
-    }
-}
 int main(){
-    int choice;
+    int  choose ;
+    str choice ;
+    cout<<"1- Black & White Filter"
+    <<endl<<"2- Invert Filter"
+    <<endl<<"3- Merge Filter"
+    <<endl<<"4- Flip Image"
+    <<endl<<"5- Darken and Lighten Image"
+    <<endl<<"6- Rotate Image"
+    <<endl<<"7- Detect Image Edges "
+    <<endl<<"8- Enlarge Image"
+    <<endl<<"9- Shrink Image"
+    <<endl<<"a- Mirror 1/2 Image"
+    <<endl<<"b- Shuffle Image"
+    <<endl<<"c- Blur Image"
+    <<endl<<"s- Save the image to a file"
+    <<endl<<"0- Exit"<<endl;
     cout << "Enter filter Number : ";
     cin >> choice;
     loadImage();
-    if (choice == 3){
-        Mergeimage();
-    }
-    else if (choice ==1 ){
+    if (choice == "1" ){
         makethephotoblackandwhite();
         saveimage_for_black_and_white()
     }
-    else if (choice == 2 ){
-        flippping_image_horizantally();
-    }
-    else if (choice == 4 ){
-        flippping_image_vertically();
-    }        
-        
-    else if (choice == 6){
-        mirror_the_lower_half_from_image();
-    }
-    else if (choice == 9){
-        mirror_the_right_half_from_image();
-    }
-    else if (choice == 7){
-        mirror_the_upper_half_from_image();
-    }
-    else if (choice == 8){
-        mirror_the_left_half_from_image();
+    else if (choice == "4" ){
+        cout<<"if you want to flip image horizantally choose 1 or  if you want to flip image vertically choose 2: ";
+        cin>>choose;
+        if (choose == 1 )
+            flippping_image_horizantally();
+            saveImage();
+        else if (choose == 2)
+            flippping_image_vertically();
+            saveImage();
     }
     
-    else if (choice == 10){
-        BlurImage();
-    }
-/*    saveImage();
-*/
+    
+    else if (choice == "a")
+        cout<<"if you want to mirror image lower half choose 1 or if you want to mirror upper half image choose 2 or if you want to mirror right half image choose 3 or if you want to mirror left half image choose 4: ";
+        cin>>choose;
+        if (choose == 1){
+            mirror_the_lower_half_from_image();
+            saveImage();
+        }
+        else if (choose == 3){
+            mirror_the_right_half_from_image();
+            saveImage();
+        }
+        else if (choose == 2){
+            mirror_the_upper_half_from_image();
+            saveImage();
+        }
+        else if (choose == 4){
+            mirror_the_left_half_from_image();
+            saveImage();
+        }
+    
     return 0;
 
 
