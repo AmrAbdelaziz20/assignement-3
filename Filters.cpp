@@ -1,13 +1,16 @@
 /*
-programming 1
-assignement 3
-name : Amr Abdelaziz Farrag             Id:202102777
-
-
-
-
-
+Program Name: Grayscale Photo Editor
+Program Purpose: Edit RGB bitmap images
+Version: 1.2
+Last Modification Date: 19/4/2022
+Authors: Mahmoud Hosam Sakr / Amr Abdelaziz Farrag / Mahmoud Ramadan Mohamed
+ID: 20210368 / 20210277 / 20210369
+Group: S7-S8
+Institution: FCAI - CU
+Presented to: Dr. Mohamed El Ramly
+Teaching Assistant: Eng. Abdulrahman Abdulmonem
 */
+
 #include <iostream>
 #include <fstream>
 #include <cstring>
