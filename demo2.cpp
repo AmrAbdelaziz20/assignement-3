@@ -1,8 +1,8 @@
 /*
 Program Name: Grayscale Photo Editor
 Program Purpose: Edit grayscale bitmap images
-Version: 1.0
-Last Modification Date: 7/4/2022
+Version: 1.2
+Last Modification Date: 19/4/2022
 Authors: Mahmoud Hosam Sakr / Amr Abdelaziz Farrag / Mahmoud Ramadan Mohamed
 ID: 20210368 / 20210277 / 20210369
 Group: S7-S8
@@ -11,13 +11,7 @@ Presented to: Dr. Mohamed El Ramly
 Teaching Assistant: Eng. Abdulrahman Abdulmonem
 */
 
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <cstring>
-#include <cmath>
-#include <algorithm>
-#include <regex>
+#include <bits/stdc++.h>
 #include "bmplib.cpp"
 using namespace std;
 
@@ -39,17 +33,21 @@ int main() {
   cout << "Welcome to FCAI Photo Editor!\n";
   while (true)
   {
+    // listing the photos available in the same directory as the source code
     cout << "List of names of the available image files:\ncrowd / elephant / fruit / house / photographer\n";
+    // loading the image into a 2d array
     loadImage();
     cout << "MENU:\n1- Black and White Image\n2- Invert Image\n3- Merge Image\n";
     cout << "4- Rotate Image\n5- Darken and Lighten Image\n6- Detect Image Edges\n";
-    cout << "7- Enlarge Image\n";
+    cout << "7- Enlarge Image\nb- Shuffle Image\n";
     cout << "Please enter the index of the desired operation: ";
+
 
     char choice;
     while (true){
       bool isNotOK = false;
       cin.ignore();
+      // receiving the user's choice and applying the corresponding filters
       cin >> choice;
       switch (choice)
       {
@@ -78,6 +76,7 @@ int main() {
           shuffleImage();
           break;
         default:
+          // defending against bad input
           cout << "Invalid operation. Please enter a valid operation index: ";
           isNotOK = true;
           break;
@@ -89,11 +88,16 @@ int main() {
         break;
       }
     }
+
+    // saving the image and asking if the user wants to quit
     saveImage();
     cout << "Do you want to exit?\n";
     string exitorno;
     cin.ignore();
     getline(cin, exitorno);
+    for (int i = 0; i < exitorno.size(); i++)
+      exitorno[i] = tolower(exitorno[i]);
+    
     if (exitorno == "yes")
     {
       exit(0);
@@ -257,7 +261,7 @@ void mergeImage(){
 void DarkenandLighten(){
     int choice2;
     
-    cout << "Choose what you want to do: \n 1. Lighten image\n2. Darken image\n";
+    cout << "Choose what you want to do: \n 1- Lighten image\n2- Darken image\n";
     while (true) {
       bool isUnavailable = false;
       cout << "Please enter the index of the desired operation: ";
@@ -265,6 +269,7 @@ void DarkenandLighten(){
       cin >> choice2;
       switch (choice2)
       {
+        // Lightening the image by increasing the level of light in each pixel
         case 1:
           for (int i = 0 ; i < SIZE ; i++){
             for (int j = 0 ; j < SIZE ; j++){
@@ -273,6 +278,7 @@ void DarkenandLighten(){
           }
           break;
 
+        // Darkening the image by decreasing the level of light in each pixel
         case 2:
           for (int i = 0 ; i < SIZE ; i++){
             for (int j = 0 ; j < SIZE ; j++){
@@ -281,6 +287,7 @@ void DarkenandLighten(){
           }
           break;
 
+        // checking for bad input
         default:
           cout << "Invalid operation index. Please enter a valid index: ";
           isUnavailable = true;
@@ -298,46 +305,39 @@ void DarkenandLighten(){
 
 //_________________________________________
 void enlargeImage() {
+  int choice, starti, startj, endi, endj;
   while (true) {
-    int choice;
     bool isUnavailable = false;
+    // asking the user to input the quad order
     cout << "Please enter the order of the quad you want to enlarge 1, 2, 3 or 4: ";
     cin.ignore();
     cin >> choice;
+    // detecting the start and end coordinates based on the user's input
     switch (choice)
     {
       case 1:
-        for (int i = 0, k = 0 ; i < SIZE / 2; i++, k+=2){
-          for (int j = 0, l = 0 ; j < SIZE / 2; j++, l+=2){
-              image2[k][l] = image2[k][l+1] = image2[k+1][l] = image2[k+1][l+1] = image[i][j];
-          }
-        }
-        break;
-
+        starti = startj = 0;
+        endi = endj = SIZE / 2;
+      break;
+    
       case 2:
-        for (int i = SIZE / 2, k = 0 ; i < SIZE; i++, k+=2){
-          for (int j = SIZE / 2, l = 0 ; j < SIZE; j++, l+=2){
-              image2[k][l] = image2[k][l+1] = image2[k+1][l] = image2[k+1][l+1] = image[i][j];
-          }
-        }
+        starti = 0;
+        startj = endi = SIZE / 2;
+        endj = SIZE;
         break;
 
       case 3:
-        for (int i = SIZE / 2, k = 0 ; i < SIZE; i++, k+=2){
-          for (int j = 0, l = 0 ; j < SIZE / 2; j++, l+=2){
-              image2[k][l] = image2[k][l+1] = image2[k+1][l] = image2[k+1][l+1] = image[i][j];
-          }
-        }
+        startj = 0;
+        starti = endj = SIZE / 2;
+        endi = SIZE;
         break;
       
       case 4:
-        for (int i = 0, k = 0 ; i < SIZE / 2; i++, k+=2){
-          for (int j = SIZE / 2, l = 0 ; j < SIZE; j++, l+=2){
-              image2[k][l] = image2[k][l+1] = image2[k+1][l] = image2[k+1][l+1] = image[i][j];
-          }
-        }
+        starti = startj = SIZE / 2;
+        endi = endj = SIZE;
         break;
       
+      // checking for bad input
       default:
         cout << "Invalid quad order. Please enter a valid order: ";
         isUnavailable = true;
@@ -352,6 +352,14 @@ void enlargeImage() {
     }
   }
 
+  // applying the nearest neighbor algorithm by copying the quad into a temporary image and zooming in by a 4x scale
+  for (int i = starti, k = 0 ; i < endi; i++, k+=2){
+    for (int j = startj, l = 0 ; j < endj; j++, l+=2){
+      image2[k][l] = image2[k][l+1] = image2[k+1][l] = image2[k+1][l+1] = image[i][j];
+    }
+  }
+  
+  // overwriting the original image with the enlarged image
   for (int i = 0; i < SIZE; i++) {
     for (int j = 0; j < SIZE; j++) {
       swap(image[i][j], image2[i][j]);
@@ -361,10 +369,61 @@ void enlargeImage() {
 
 //_________________________________________
 void shuffleImage() {
-    image2[SIZE][SIZE] = {0};
-    for (int i = 0; i < SIZE; i++) {
+  string order;
+  // asking the user for the shuffle order
+  cout << "Please enter the order of the shuffled image in the format n1 n2 n3 n4 , n = {1,2,3,4} : ";
+  cin.ignore();
+  getline(cin, order);
+  // removing spaces
+  regex r (" ");
+  order = regex_replace(order, r, "");
+
+  int starti, endi;
+  int startj, endj;
+  // looping 4 times to apply the 4-quad shuffle
+  for (int ltr = 0; ltr < 4; ltr++) {
+    // detecting the start and end coordinates based on the user's input
+    switch (order[ltr])
+    {
+    case '1':
+      starti = startj = 0;
+      endi = endj = SIZE / 2;
+      break;
+    
+    case '2':
+      starti = 0;
+      startj = endi = SIZE / 2;
+      endj = SIZE;
+      break;
+
+    case '3':
+      startj = 0;
+      starti = endj = SIZE / 2;
+      endi = SIZE;
+      break;
+    
+    case '4':
+      starti = startj = SIZE / 2;
+      endi = endj = SIZE;
+      break;
+    }
+
+    // detecting the beginning and ending of the temporary image based on the iteration either iteration 1, 2, 3 or 4
+    int start_l[] = {0, SIZE / 2, 0, SIZE / 2};
+    int start_k[] = {0, 0, SIZE / 2, SIZE / 2};
+
+    // looping over both images and assigning the desired quad to the temporary image
+    for (int i = starti, k = start_k[ltr]; i < endi; i++, k++) {
+      for (int j = startj, l = start_l[ltr]; j < endj; j++, l++) {
+        image2[k][l] = image[i][j];
+      }
+    }
+  }
+  
+  // overwriting the original image with the shuffled image
+  for (int i = 0; i < SIZE; i++) {
     for (int j = 0; j < SIZE; j++) {
-      cout << image2[i][j] << " ";
+      swap(image[i][j], image2[i][j]);
     }
   }
 }
