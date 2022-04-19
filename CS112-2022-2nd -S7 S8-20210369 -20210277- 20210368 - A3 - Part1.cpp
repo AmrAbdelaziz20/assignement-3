@@ -30,6 +30,8 @@ void blackandwhiteImage();
 void detectEdges();
 void mergeImage();
 void DarkenandLighten();
+void flip_image();
+void mirror_image();
 
 int main() {
   cout << "Welcome to FCAI Photo Editor!\n";
