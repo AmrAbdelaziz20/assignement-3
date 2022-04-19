@@ -1,3 +1,4 @@
+
 /*
 Program Name: Grayscale Photo Editor
 Program Purpose: Edit grayscale bitmap images
