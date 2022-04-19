@@ -29,7 +29,14 @@ void mergeImage();
 void DarkenandLighten();
 void enlargeImage();
 void shuffleImage();
-
+void flip_image();
+void mirror_image();
+void mirror_the_right_half_from_image();
+void mirror_the_lower_half_from_image();
+void mirror_the_upper_half_from_image();
+void mirror_the_left_half_from_image();
+void flippping_image_vertically();
+void flippping_image_horizantally();
 int main() {
   cout << "Welcome to FCAI Photo Editor!\n";
   while (true)
@@ -62,17 +69,23 @@ int main() {
           mergeImage();
           break;
         case '4':
-          rotateImage();
+          flip_image();
           break;
         case '5':
           DarkenandLighten();
           break;
         case '6':
-          detectEdges();
+          rotateImage();
           break;
         case '7':
+          detectEdges();
+          break;
+        case '8':
           enlargeImage();
           break;
+        case 'a':
+          mirror_image();
+          break;      
         case 'b':
           shuffleImage();
           break;
@@ -427,4 +440,102 @@ void shuffleImage() {
       swap(image[i][j], image2[i][j]);
     }
   }
+}
+  //the next two functions one for flipping the image horizantally and verically 
+  void flippping_image_vertically(){// is to make the higherside is the lowerside and the inverse as well
+  for (int k = 0; k < (SIZE);k++){
+              for (int l = 0; l < (SIZE/2);l++){
+  //we make a nested because we want to chech every row and every column
+              /*to flip the image vertically we must inverse every column by making the size -1-l (256 - 1 - l)
+              * if l is 50 the 50th column should be 205*/
+              swap(image[k][l] , image[k][SIZE-1-l]);
+              }//this -1 in "[SIZE-1-l]" because if l is equal 256 it will be 256-1-256= -1 this is the last element in the array  
+          }
+  }
+  void flippping_image_horizantally(){// is to make the right side is the left side and the inverse as well
+  for (int k = 0; k < (SIZE/2);k++){
+              for (int l = 0; l < SIZE;l++){
+  //we make a nested because we want to chech every row and every column
+              swap(image[k][l] , image[SIZE-1-k][l]);//to flip the image horzantally we must inverse every row by making the size -1-l (256 - 1 - k)if l is 50 the 50th row should be 205
+              }
+          }
+  }
+  void mirror_image(){
+    int make_choice;
+    cout<<"if you want to mirror the right half from the image choose 1 and if you want to mirror the down half of the image choose 2 and if you want to mirror the upper half choose 3 and if you want to mirror the left half choose 4   : ";
+    cin>>make_choice;
+    while (make_choice!=1 && make_choice!= 2 && make_choice != 3 &&  make_choice != 4 ){
+        cout<<"if you want to mirror the right half from the image choose 1 and if you want to mirror the down half of the image choose 2 and if you want to mirror the upper half choose 3 and if you want to mirror the left half choose 4   :  : ";
+        cin>>make_choice;
+    }
+    if (make_choice==1){
+        mirror_the_right_half_from_image();
+    }
+    else if (make_choice==2){
+        mirror_the_lower_half_from_image();
+    }
+    else if (make_choice==3){
+        mirror_the_upper_half_from_image();
+    }
+    else if (make_choice==4){
+        mirror_the_left_half_from_image();
+    }
+  }
+  void flip_Image(){
+    int choose;//we take an integer value 1 or 2 to make the user choose between flipping the image vertically or horizantally 
+cout<<"welcome ya user ya habibi" <<endl<< "if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 : "<<endl ;
+cin>>choose;
+while(choose!=1 && choose!=2){ // if the user choose a number not equal to 1 or 2  this loop will make choose 1 or 2 
+    cout<<"welcome ya user ya habibi "<<endl<<"if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 :";
+    cin>>choose;
+}
+if (choose ==1){
+    flipping_image_horizantally();//if the user choose 1 the image  will be flipped horizantally 
+}
+else if(choose == 2){
+    flipping_image_vertically();//if the user  choose 2 the image  will be flipped vertically 
+}
+    
+}
+//the next function mirror the right half image 
+void mirror_the_right_half_from_image(){
+    // a nested loop to chech rows and columns 
+    for(int i=0 ;i<SIZE ;i++){
+        for(int j=0 ; j< SIZE ; j++){
+            if(i>=0 && j<128)//the "128"to mirror the first 128 columns only and the other 128 won't change 
+            image[i][j]=image[i][255-j];//255-j to mirror the right half only 
+        }
+    }
+    
+}
+//the next function to mirror down half image 
+void mirror_the_lower_half_from_image(){
+    // a nested loop to chech rows and columns 
+    for(int i=0 ;i<SIZE ;i++){
+        for(int j=0 ; j< SIZE ; j++){
+            if(i<128 && j>=0)//the "128"to mirror the first 128 rows only and the other 128 won't change
+            image[i][j]=image[255-i][j];//255-i to mirror the lower half only
+        }
+    }
+    
+}
+//the next function mirror the upper half image 
+void mirror_the_upper_half_from_image(){
+    for(int i=0 ;i<SIZE ;i++){
+        for(int j=0 ; j< SIZE ; j++){
+            if(i>=128 && j>=0)//the "128"to mirror the first 128 rows only and the other 128 won't change
+            image[i][j]=image[255-i][j];//255-i to mirror the upper half only
+        }
+    }
+    
+}
+//the next function mirror the left half image 
+void mirror_the_left_half_from_image(){
+    for(int i=0 ;i<SIZE ;i++){
+        for(int j=0 ; j< SIZE ; j++){
+            if(i>=0 && j>=128)//the "128"to mirror the first 128 columns only and the other 128 won't change
+            image[i][j]=image[i][255-j];//255-j to mirror the left half only 
+        }
+    }
+    
 }
