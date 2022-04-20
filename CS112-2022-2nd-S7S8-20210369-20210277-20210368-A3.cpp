@@ -445,6 +445,7 @@ void shuffleImage() {
     }
   }
 }
+//__________________________________________________________________________________
   //the next two functions one for flipping the image horizantally and verically 
   void flippping_image_vertically(){// is to make the higherside is the lowerside and the inverse as well
   for (int k = 0; k < (SIZE);k++){
@@ -456,6 +457,7 @@ void shuffleImage() {
               }//this -1 in "[SIZE-1-l]" because if l is equal 256 it will be 256-1-256= -1 this is the last element in the array  
           }
   }
+  //__________________________________________________________________________________
   void flippping_image_horizantally(){// is to make the right side is the left side and the inverse as well
   for (int k = 0; k < (SIZE/2);k++){
               for (int l = 0; l < SIZE;l++){
@@ -464,6 +466,7 @@ void shuffleImage() {
               }
           }
   }
+  //_________________________________________
   void mirror_image(){
     int make_choice;
     cout<<"if you want to mirror the right half from the image choose 1 and if you want to mirror the down half of the image choose 2 and if you want to mirror the upper half choose 3 and if you want to mirror the left half choose 4   : ";
@@ -485,6 +488,7 @@ void shuffleImage() {
         mirror_the_left_half_from_image();
     }
   }
+  //_________________________________________
   void flip_Image(){
     int choose;//we take an integer value 1 or 2 to make the user choose between flipping the image vertically or horizantally 
 cout<<"welcome ya user ya habibi" <<endl<< "if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 : "<<endl ;
@@ -501,6 +505,7 @@ else if(choose == 2){
 }
     
 }
+//__________________________________________________________________________________
 //the next function mirror the right half image 
 void mirror_the_right_half_from_image(){
     // a nested loop to chech rows and columns 
@@ -512,6 +517,7 @@ void mirror_the_right_half_from_image(){
     }
     
 }
+//__________________________________________________________________________________
 //the next function to mirror down half image 
 void mirror_the_lower_half_from_image(){
     // a nested loop to chech rows and columns 
@@ -523,6 +529,7 @@ void mirror_the_lower_half_from_image(){
     }
     
 }
+//__________________________________________________________________________________
 //the next function mirror the upper half image 
 void mirror_the_upper_half_from_image(){
     for(int i=0 ;i<SIZE ;i++){
@@ -533,6 +540,7 @@ void mirror_the_upper_half_from_image(){
     }
     
 }
+//__________________________________________________________________________________
 //the next function mirror the left half image 
 void mirror_the_left_half_from_image(){
     for(int i=0 ;i<SIZE ;i++){
