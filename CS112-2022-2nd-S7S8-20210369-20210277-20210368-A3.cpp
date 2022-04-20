@@ -11,9 +11,13 @@ Institution: FCAI - CU
 Presented to: Dr. Mohamed El Ramly
 Teaching Assistant: Eng. Abdulrahman Abdulmonem
 */
-
-#include <bits/stdc++.h>
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <cmath>
 #include "bmplib.cpp"
+#include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
 unsigned char image[SIZE][SIZE];
