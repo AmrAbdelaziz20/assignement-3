@@ -29,7 +29,7 @@ void invertImage();
 void rotateImage();
 void blackandwhiteImage();
 void detectEdges();
-void mergeImage();
+void Mergeimage();
 void DarkenandLighten();
 void enlargeImage();
 void shuffleImage();
@@ -70,7 +70,7 @@ int main() {
           invertImage();
           break;
         case '3':
-          mergeImage();
+          Mergeimage();
           break;
         case '4':
           flip_image();
@@ -89,7 +89,7 @@ int main() {
           break;
         case 'a':
           mirror_image();
-          break;      
+          break;
         case 'b':
           shuffleImage();
           break;
@@ -115,7 +115,7 @@ int main() {
     getline(cin, exitorno);
     for (int i = 0; i < exitorno.size(); i++)
       exitorno[i] = tolower(exitorno[i]);
-    
+
     if (exitorno == "yes")
     {
       exit(0);
@@ -184,7 +184,7 @@ void rotateImage() {
           }
         }
         break;
-      
+
       // rotating the image 180 degrees by swapping the value of the current row
       // with the corresponding row in the end of the image
       case 180:
@@ -194,7 +194,7 @@ void rotateImage() {
           }
         }
         break;
-      
+
       // transposing the original image matrix
       case 270:
         for (int i = 0; i < SIZE; i++) {
@@ -246,12 +246,12 @@ void detectEdges() {
     for(int j=0 ;j<SIZE ;j++) {
       // if the pixel colors of two neighbor pixels aren't the same
       // then the pixel to the left is an interior pixel
-      if (image[i][j]!=image[i+1][j+1])  
+      if (image[i][j]!=image[i+1][j+1])
           image[i][j]=0;
-      
+
       // if the pixel colors of two neighbor pixels are the same
       // then the pixel to the left is an edge
-      else if(image[i][j] == image[i+1][j+1]) 
+      else if(image[i][j] == image[i+1][j+1])
           image[i][j]=255;
     }
   }
@@ -278,7 +278,7 @@ void mergeImage(){
 //_________________________________________
 void DarkenandLighten(){
     int choice2;
-    
+
     cout << "Choose what you want to do: \n 1- Lighten image\n2- Darken image\n";
     while (true) {
       bool isUnavailable = false;
@@ -311,7 +311,7 @@ void DarkenandLighten(){
           isUnavailable = true;
           break;
       }
-      
+
       if (isUnavailable) {
         continue;
       }
@@ -337,7 +337,7 @@ void enlargeImage() {
         starti = startj = 0;
         endi = endj = SIZE / 2;
       break;
-    
+
       case 2:
         starti = 0;
         startj = endi = SIZE / 2;
@@ -349,19 +349,19 @@ void enlargeImage() {
         starti = endj = SIZE / 2;
         endi = SIZE;
         break;
-      
+
       case 4:
         starti = startj = SIZE / 2;
         endi = endj = SIZE;
         break;
-      
+
       // checking for bad input
       default:
         cout << "Invalid quad order. Please enter a valid order: ";
         isUnavailable = true;
         break;
     }
-    
+
     if (isUnavailable) {
       continue;
     }
@@ -376,7 +376,7 @@ void enlargeImage() {
       image2[k][l] = image2[k][l+1] = image2[k+1][l] = image2[k+1][l+1] = image[i][j];
     }
   }
-  
+
   // overwriting the original image with the enlarged image
   for (int i = 0; i < SIZE; i++) {
     for (int j = 0; j < SIZE; j++) {
@@ -407,7 +407,7 @@ void shuffleImage() {
       starti = startj = 0;
       endi = endj = SIZE / 2;
       break;
-    
+
     case '2':
       starti = 0;
       startj = endi = SIZE / 2;
@@ -419,7 +419,7 @@ void shuffleImage() {
       starti = endj = SIZE / 2;
       endi = SIZE;
       break;
-    
+
     case '4':
       starti = startj = SIZE / 2;
       endi = endj = SIZE;
@@ -437,7 +437,7 @@ void shuffleImage() {
       }
     }
   }
-  
+
   // overwriting the original image with the shuffled image
   for (int i = 0; i < SIZE; i++) {
     for (int j = 0; j < SIZE; j++) {
@@ -446,7 +446,7 @@ void shuffleImage() {
   }
 }
 //__________________________________________________________________________________
-  //the next two functions one for flipping the image horizantally and verically 
+  //the next two functions one for flipping the image horizantally and verically
   void flippping_image_vertically(){// is to make the higherside is the lowerside and the inverse as well
   for (int k = 0; k < (SIZE);k++){
               for (int l = 0; l < (SIZE/2);l++){
@@ -454,7 +454,7 @@ void shuffleImage() {
               /*to flip the image vertically we must inverse every column by making the size -1-l (256 - 1 - l)
               * if l is 50 the 50th column should be 205*/
               swap(image[k][l] , image[k][SIZE-1-l]);
-              }//this -1 in "[SIZE-1-l]" because if l is equal 256 it will be 256-1-256= -1 this is the last element in the array  
+              }//this -1 in "[SIZE-1-l]" because if l is equal 256 it will be 256-1-256= -1 this is the last element in the array
           }
   }
   //__________________________________________________________________________________
@@ -490,47 +490,47 @@ void shuffleImage() {
   }
   //_________________________________________
   void flip_Image(){
-    int choose;//we take an integer value 1 or 2 to make the user choose between flipping the image vertically or horizantally 
+    int choose;//we take an integer value 1 or 2 to make the user choose between flipping the image vertically or horizantally
 cout<<"welcome ya user ya habibi" <<endl<< "if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 : "<<endl ;
 cin>>choose;
-while(choose!=1 && choose!=2){ // if the user choose a number not equal to 1 or 2  this loop will make choose 1 or 2 
+while(choose!=1 && choose!=2){ // if the user choose a number not equal to 1 or 2  this loop will make choose 1 or 2
     cout<<"welcome ya user ya habibi "<<endl<<"if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 :";
     cin>>choose;
 }
 if (choose ==1){
-    flipping_image_horizantally();//if the user choose 1 the image  will be flipped horizantally 
+    flipping_image_horizantally();//if the user choose 1 the image  will be flipped horizantally
 }
 else if(choose == 2){
-    flipping_image_vertically();//if the user  choose 2 the image  will be flipped vertically 
+    flipping_image_vertically();//if the user  choose 2 the image  will be flipped vertically
 }
-    
+
 }
 //__________________________________________________________________________________
-//the next function mirror the right half image 
+//the next function mirror the right half image
 void mirror_the_right_half_from_image(){
-    // a nested loop to chech rows and columns 
+    // a nested loop to chech rows and columns
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
-            if(i>=0 && j<128)//the "128"to mirror the first 128 columns only and the other 128 won't change 
-            image[i][j]=image[i][255-j];//255-j to mirror the right half only 
+            if(i>=0 && j<128)//the "128"to mirror the first 128 columns only and the other 128 won't change
+            image[i][j]=image[i][255-j];//255-j to mirror the right half only
         }
     }
-    
+
 }
 //__________________________________________________________________________________
-//the next function to mirror down half image 
+//the next function to mirror down half image
 void mirror_the_lower_half_from_image(){
-    // a nested loop to chech rows and columns 
+    // a nested loop to chech rows and columns
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
             if(i<128 && j>=0)//the "128"to mirror the first 128 rows only and the other 128 won't change
             image[i][j]=image[255-i][j];//255-i to mirror the lower half only
         }
     }
-    
+
 }
 //__________________________________________________________________________________
-//the next function mirror the upper half image 
+//the next function mirror the upper half image
 void mirror_the_upper_half_from_image(){
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
@@ -538,16 +538,41 @@ void mirror_the_upper_half_from_image(){
             image[i][j]=image[255-i][j];//255-i to mirror the upper half only
         }
     }
-    
+
 }
 //__________________________________________________________________________________
-//the next function mirror the left half image 
+//the next function mirror the left half image
 void mirror_the_left_half_from_image(){
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
             if(i>=0 && j>=128)//the "128"to mirror the first 128 columns only and the other 128 won't change
-            image[i][j]=image[i][255-j];//255-j to mirror the left half only 
+            image[i][j]=image[i][255-j];//255-j to mirror the left half only
         }
     }
-    
+
 }
+//__________________________________________________________________________________
+// the next function merge the images
+void Mergeimage(){
+    // image 2 for merging
+    char img2[100];
+
+
+
+    cout << "Enter image to merge : ";
+    cin >> img2;
+    //combine with .bmp
+    strcat(img2, ".bmp");
+    readGSBMP(img2, image2);
+
+    for (int i = 0 ; i < SIZE ; i++){
+        for (int j = 0 ; j < SIZE ; j++){
+
+            image[i][j] = (image[i][j] + image2[i][j]) / 2;
+
+        }
+    }
+
+}
+
+
