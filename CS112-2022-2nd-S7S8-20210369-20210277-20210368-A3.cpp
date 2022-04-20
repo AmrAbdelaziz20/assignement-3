@@ -33,6 +33,7 @@ void Mergeimage();
 void DarkenandLighten();
 void enlargeImage();
 void shuffleImage();
+void ShrinkImage();
 void flip_image();
 void mirror_image();
 void mirror_the_right_half_from_image();
@@ -87,6 +88,9 @@ int main() {
         case '8':
           enlargeImage();
           break;
+        case '9':
+            ShrinkImage();
+            break;
         case 'a':
           mirror_image();
           break;
@@ -258,24 +262,7 @@ void detectEdges() {
 }
 
 //_________________________________________
-void mergeImage(){
-  // image 2 for merging
-  char img2[100];
 
-  cout << "Enter image to merge : ";
-  cin >> img2;
-  //combine with .bmp
-  strcat(img2, ".bmp");
-  readGSBMP(img2, image2);
-
-  for (int i = 0 ; i < SIZE ; i++){
-    for (int j = 0 ; j < SIZE ; j++){
-        image[i][j] = (image[i][j] + image2[i][j]) / 2;
-    }
-  }
-}
-
-//_________________________________________
 void DarkenandLighten(){
     int choice2;
 
@@ -574,29 +561,33 @@ void Mergeimage(){
     }
 
 }
+
 //__________________________________________________________________________________
-// the next function Darken and lighten image
-void DarkenandLighten(){
-    int choice2;
-    cout << "1. Lighten image" << endl << "2. Darken image" << endl;
-    cin >> choice2;
-    if (choice2 == 1){
-        for (int i = 0 ; i < SIZE ; i++){
-            for (int j = 0 ; j < SIZE ; j++){
+void ShrinkImage(){
+   // char img2[100]
+    int l = 0 , f = 0;
+    int vshrink, result; // vshrink is the value of the shrink
 
-                image[i][j] =  image[i][j] + ((255 - image[i][j])) / 2;
+    cout << "1. 1/4 --> shrink value = 4" << endl;
+    cout << "2. 1/2 --> shrink value = 2" << endl;
+    cout << "3. 1/3 --> shrink value = 3" << endl;
+    cout << endl;
 
-            }
+    cout << "enter shrink amount : ";
+    cin >> vshrink;
+
+    //for dividing the size of the image
+    result = SIZE / vshrink;
+    for (int i = 0 ; i < result ; i++){
+        for (int j = 0 ; j < result ; j++){
+
+            image2[i][j] = image[l][f];
+            image2[i][j] = image[l][f];
+            image2[i][j] = image[l][f];
+
+            f = f + vshrink;
         }
-
-    }else if (choice2 == 2){
-        for (int i = 0 ; i < SIZE ; i++){
-            for (int j = 0 ; j < SIZE ; j++){
-
-                image[i][j] = image[i][j] / 2;
-
-            }
-        }
-    }
+        f = 1;
+        l = l + vshrink;
 }
-
+}
