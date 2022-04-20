@@ -133,7 +133,7 @@ strcat(svimg, ".bmp");
 writeGSBMP(svimg, new_image);
 
 }
-void flippping_image_vertically(){// is to make the higherside is the lowerside and the inverse as well
+void flipping_image_vertically(){// is to make the higherside is the lowerside and the inverse as well
 for (int k = 0; k < (SIZE);k++){
             for (int l = 0; l < (SIZE/2);l++){
                 for (int n =0 ; n< RGB ; n++ ){//we make a nested because we want to chech every row and every column
@@ -144,7 +144,7 @@ for (int k = 0; k < (SIZE);k++){
         }
 }
 }
-void flippping_image_horizantally(){// is to make the right side is the left side and the inverse as well
+void flipping_image_horizantally(){// is to make the right side is the left side and the inverse as well
 for (int k = 0; k < (SIZE/2);k++){
     for (int l = 0; l < SIZE;l++){
         for (int n =0 ; n< RGB ; n++ ){
@@ -183,11 +183,11 @@ int main(){
         cout<<"if you want to flip image horizantally choose 1 or  if you want to flip image vertically choose 2: ";
         cin>>choose;
         if (choose == 1 ){
-            flippping_image_horizantally();
+            flipping_image_horizantally();
             saveImage();
         }
         else if (choose == 2){
-            flippping_image_vertically();
+            flipping_image_vertically();
             saveImage();
         }
     }
