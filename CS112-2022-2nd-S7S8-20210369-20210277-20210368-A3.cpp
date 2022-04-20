@@ -574,5 +574,29 @@ void Mergeimage(){
     }
 
 }
+//__________________________________________________________________________________
+// the next function Darken and lighten image
+void DarkenandLighten(){
+    int choice2;
+    cout << "1. Lighten image" << endl << "2. Darken image" << endl;
+    cin >> choice2;
+    if (choice2 == 1){
+        for (int i = 0 ; i < SIZE ; i++){
+            for (int j = 0 ; j < SIZE ; j++){
 
+                image[i][j] =  image[i][j] + ((255 - image[i][j])) / 2;
+
+            }
+        }
+
+    }else if (choice2 == 2){
+        for (int i = 0 ; i < SIZE ; i++){
+            for (int j = 0 ; j < SIZE ; j++){
+
+                image[i][j] = image[i][j] / 2;
+
+            }
+        }
+    }
+}
 
