@@ -186,6 +186,29 @@ void Mergeimage(){
 
 
 }
+void DarkenandLighten(){
+    int choice2;
+    cout << "1. Lighten image" << endl << "2. Darken image" << endl;
+    cin >> choice2;
+    if (choice2 == 1){
+        for (int i = 0 ; i < SIZE ; i++){
+            for (int j = 0 ; j < SIZE ; j++){
+                for (int n = 0 ; n < RGB ; n++){
+                  image[i][j][n] =  image[i][j][n] + ((255 - image[i][j][n])) / 2;
+                }
+            }
+        }
+
+    }else if (choice2 == 2){
+        for (int i = 0 ; i < SIZE ; i++){
+            for (int j = 0 ; j < SIZE ; j++){
+                for (int n = 0 ; n < RGB ; n++){
+                    image[i][j][n] = image[i][j][n] / 2;
+                }
+            }
+        }
+    }
+}
 int main(){
     int  choose ;
     string choice ;
@@ -224,6 +247,9 @@ int main(){
             flipping_image_vertically();
             saveImage();
         }
+    }else if (choice == "5"){
+        DarkenandLighten();
+        saveImage();
     }
     else if (choice == "7" ){
         makethephotoblackandwhite();
