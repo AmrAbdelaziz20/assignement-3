@@ -209,6 +209,34 @@ void DarkenandLighten(){
         }
     }
 }
+void ShrinkImage(){
+   // char img2[100]
+    int l = 0 , f = 0;
+    int vshrink, result; // vshrink is the value of the shrink
+
+    cout << "1. 1/4 --> shrink value = 4" << endl;
+    cout << "2. 1/2 --> shrink value = 2" << endl;
+    cout << "3. 1/3 --> shrink value = 3" << endl;
+    cout << endl;
+
+    cout << "enter shrink amount : ";
+    cin >> vshrink;
+
+    //for dividing the size of the image
+    result = SIZE / vshrink;
+    for (int i = 0 ; i < result ; i++){
+        for (int j = 0 ; j < result ; j++){
+            for (int n = 0 ; n < RGB ; n++){
+                image2[i][j][n-2] = image[l][f][n-2];
+                image2[i][j][n-1] = image[l][f][n-1];
+                image2[i][j][n] = image[l][f][n];
+            }
+            f = f + vshrink;
+        }
+        f = 1;
+        l = l + vshrink;
+}
+}
 int main(){
     int  choose ;
     string choice ;
@@ -255,6 +283,9 @@ int main(){
         makethephotoblackandwhite();
         detect_image_edges();
         saveimage_for_black_and_white();
+    }else if (choice == "9"){
+        ShrinkImage();
+        saveImage2();
     }
 
     else if (choice == "a"){
