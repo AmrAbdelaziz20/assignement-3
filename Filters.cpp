@@ -237,6 +237,17 @@ void ShrinkImage(){
         l = l + vshrink;
 }
 }
+void BlurImage(){
+    for (int i = 0 ; i < SIZE ; i++){
+        for (int j = 0 ; j < SIZE ; j++){
+            for (int n = 0 ; n < RGB ; n++){
+                    //adding adjacent pixels in one pixel
+                image[i][j][n] = (image[i][j][n] + image[i+1][j][n] + image[i][j+1][n] + image[i+1][j+1][n] + image[i-1][j][n] + image[i][j-1][n] + image[i-1][j-1][n] + image[i+2][j][n] + image[i][j+2][n] + image[i+2][j+2][n] + image[i-2][j][n] + image[i][j-2][n] + image[i-2][j-2][n] + image[i+3][j][n] + image[i][j+3][n] + image[i+3][j+3][n] + image[i-3][j][n] + image[i][j-3][n] + image[i-3][j-3][n]) / 19;
+            }
+
+        }
+    }
+}
 int main(){
     int  choose ;
     string choice ;
@@ -307,6 +318,9 @@ int main(){
             mirror_the_left_half_from_image();
             saveImage();
         }
+    }
+    else if (choice == "c"){
+        BlurImage();
     }
     return 0;
 
