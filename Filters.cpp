@@ -22,6 +22,7 @@ Teaching Assistant: Eng. Abdulrahman Abdulmonem
 using namespace std;
 unsigned char image[SIZE][SIZE][RGB];
 unsigned char new_image[SIZE][SIZE];
+unsigned char image2 [SIZE][SIZE][RGB];
 void loadImage(){
     char img[100];
 
@@ -42,64 +43,73 @@ void saveImage(){
     strcat(svimg, ".bmp");
     writeRGBBMP(svimg, image);
 }
-//the next function mirror the right half image 
+void saveImage2(){
+    //for saving another image for shrink filter
+    char svimg2 [100];
+    cout << "Enter new image name : ";
+    cin >> svimg2;
+
+    strcat(svimg2, ".bmp");
+    writeRGBBMP(svimg2, image2);
+}
+//the next function mirror the right half image
 void mirror_the_right_half_from_image(){
-    // a nested loop to chech rows and columns 
+    // a nested loop to chech rows and columns
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
-            for (int n =0 ; n< RGB ; n++ ){   
-            if(i>=0 && j<128)//the "128"to mirror the first 128 columns only and the other 128 won't change 
-            image[i][j][n]=image[i][255-j][n];//255-j to mirror the right half only 
+            for (int n =0 ; n< RGB ; n++ ){
+            if(i>=0 && j<128)//the "128"to mirror the first 128 columns only and the other 128 won't change
+            image[i][j][n]=image[i][255-j][n];//255-j to mirror the right half only
             }
         }
 
     }
 }
-//the next function to mirror down half image 
+//the next function to mirror down half image
 void mirror_the_lower_half_from_image(){
-    // a nested loop to chech rows and columns 
+    // a nested loop to chech rows and columns
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
-            for (int n =0 ; n< RGB ; n++ ){               
+            for (int n =0 ; n< RGB ; n++ ){
                 if(i<128 && j>=0)//the "128"to mirror the first 128 rows only and the other 128 won't change
                 image[i][j][n]=image[255-i][j][n];//255-i to mirror the lower half only
             }
-        }   
+        }
     }
 }
-//the next function mirror the upper half image 
+//the next function mirror the upper half image
 void mirror_the_upper_half_from_image(){
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
-            for (int n =0 ; n< RGB ; n++ ){   
+            for (int n =0 ; n< RGB ; n++ ){
                 if(i>=128 && j>=0)//the "128"to mirror the first 128 rows only and the other 128 won't change
                 image[i][j][n]=image[255-i][j][n];//255-i to mirror the upper half only
         }
     }
-    
+
 }
 }
-//the next function mirror the left half image 
+//the next function mirror the left half image
 void mirror_the_left_half_from_image(){
     for(int i=0 ;i<SIZE ;i++){
         for(int j=0 ; j< SIZE ; j++){
-            for (int n =0 ; n< RGB ; n++ ){               
+            for (int n =0 ; n< RGB ; n++ ){
             if(i>=0 && j>=128)//the "128"to mirror the first 128 columns only and the other 128 won't change
-            image[i][j][n]=image[i][255-j][n];//255-j to mirror the left half only 
+            image[i][j][n]=image[i][255-j][n];//255-j to mirror the left half only
         }
     }
-    
+
 }
 }
 void detect_image_edges(){//function to detect the image after make the photo black and white
     for(int i=0 ; i<SIZE ;i++){
         for(int j=0 ;j<SIZE ;j++){
-            if (new_image[i][j]!= new_image[i+1][j+1]){// if two pixels are after each other havenot the same color it will be white  
+            if (new_image[i][j]!= new_image[i+1][j+1]){// if two pixels are after each other havenot the same color it will be white
                 new_image[i][j]=0;
             }
-            else if(new_image[i][j] == new_image[i+1][j+1]){// if two pixels are after each other havenot the same color it will be black 
+            else if(new_image[i][j] == new_image[i+1][j+1]){// if two pixels are after each other havenot the same color it will be black
                 new_image[i][j]=255;
-            
+
         }
     }
 }
@@ -115,13 +125,13 @@ void makethephotoblackandwhite(){
         }
     for(int i = 0 ;i < SIZE ; i++){//nested loop will iterate the 2d array (rows and columns)
         for(int j = 0 ; j < SIZE ; j++){
-             
+
                 if (new_image[i][j]> 127)
-                    new_image[i][j] = 255 ; //make it black 
+                    new_image[i][j] = 255 ; //make it black
                 else
                     new_image[i][j] = 0;    //make it white
             }
-        
+
 
     }
 }
@@ -140,7 +150,7 @@ for (int k = 0; k < (SIZE);k++){
             /*to flip the image vertically we must inverse every column by making the size -1-l (256 - 1 - l)
             * if l is 50 the 50th column should be 205*/
             swap(image[k][l][n] , image[k][SIZE-1-l][n]);
-            }//this -1 in "[SIZE-1-l]" because if l is equal 256 it will be 256-1-256= -1 this is the last element in the array  
+            }//this -1 in "[SIZE-1-l]" because if l is equal 256 it will be 256-1-256= -1 this is the last element in the array
         }
 }
 }
@@ -154,7 +164,28 @@ for (int k = 0; k < (SIZE/2);k++){
         }
 }
 }
+void Mergeimage(){
+    // image 2 for merging
+    char img2[100];
 
+
+
+    cout << "Enter image to merge : ";
+    cin >> img2;
+    //combine with .bmp
+    strcat(img2, ".bmp");
+    readRGBBMP(img2, image2);
+
+    for (int i = 0 ; i < SIZE ; i++){
+        for (int j = 0 ; j < SIZE ; j++){
+            for (int n = 0 ; n < RGB ; n++){
+               image[i][j][n] = (image[i][j][n] + image2[i][j][n]) / 2;
+            }
+        }
+    }
+
+
+}
 int main(){
     int  choose ;
     string choice ;
@@ -178,6 +209,9 @@ int main(){
     if (choice == "1" ){
         makethephotoblackandwhite();
         saveimage_for_black_and_white();
+    }else if (choice == "3"){
+        Mergeimage();
+        saveImage();
     }
     else if (choice == "4" ){
         cout<<"if you want to flip image horizantally choose 1 or  if you want to flip image vertically choose 2: ";
@@ -196,7 +230,7 @@ int main(){
         detect_image_edges();
         saveimage_for_black_and_white();
     }
-    
+
     else if (choice == "a"){
         cout<<"if you want to mirror image lower half choose 1 or if you want to mirror upper half image choose 2 or if you want to mirror right half image choose 3 or if you want to mirror left half image choose 4: ";
         cin>>choose;

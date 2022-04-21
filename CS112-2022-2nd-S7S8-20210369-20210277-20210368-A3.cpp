@@ -591,3 +591,16 @@ void ShrinkImage(){
         l = l + vshrink;
 }
 }
+//__________________________________________________________________________________
+// Next filter is Blur image
+void BlurImage(){
+    for (int i = 0 ; i < SIZE ; i++){
+        for (int j = 0 ; j < SIZE ; j++){
+
+                    //adding adjacent pixels in one pixel
+            image[i][j] = (image[i][j] + image[i+1][j] + image[i][j+1] + image[i+1][j+1] + image[i-1][j] + image[i][j-1] + image[i-1][j-1] + image[i+2][j] + image[i][j+2] + image[i+2][j+2] + image[i-2][j] + image[i][j-2] + image[i-2][j-2] + image[i+3][j] + image[i][j+3] + image[i+3][j+3] + image[i-3][j] + image[i][j-3] + image[i-3][j-3]) / 19;
+
+
+        }
+    }
+}
