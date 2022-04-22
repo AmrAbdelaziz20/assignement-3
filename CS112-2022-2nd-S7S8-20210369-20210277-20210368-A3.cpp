@@ -11,12 +11,7 @@ Institution: FCAI - CU
 Presented to: Dr. Mohamed El Ramly
 Teaching Assistant: Eng. Abdulrahman Abdulmonem
 */
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <cmath>
 #include "bmplib.cpp"
-#include <string>
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -51,8 +46,8 @@ int main() {
     // loading the image into a 2d array
     loadImage();
     cout << "MENU:\n1- Black and White Image\n2- Invert Image\n3- Merge Image\n";
-    cout << "4- Rotate Image\n5- Darken and Lighten Image\n6- Detect Image Edges\n";
-    cout << "7- Enlarge Image\nb- Shuffle Image\n";
+    cout << "4-Flip Image\n5- Rotate Image\n6- Darken and Lighten Image\n7- Detect Image Edges\n";
+    cout << "8- Enlarge Image\n9- Shrink Image\na- Mirror Image\nb- Shuffle Image\n";
     cout << "Please enter the index of the desired operation: ";
 
 
@@ -476,20 +471,20 @@ void shuffleImage() {
     }
   }
   //_________________________________________
-  void flip_Image(){
-    int choose;//we take an integer value 1 or 2 to make the user choose between flipping the image vertically or horizantally
-cout<<"welcome ya user ya habibi" <<endl<< "if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 : "<<endl ;
-cin>>choose;
-while(choose!=1 && choose!=2){ // if the user choose a number not equal to 1 or 2  this loop will make choose 1 or 2
-    cout<<"welcome ya user ya habibi "<<endl<<"if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 :";
-    cin>>choose;
-}
-if (choose ==1){
-    flipping_image_horizantally();//if the user choose 1 the image  will be flipped horizantally
-}
-else if(choose == 2){
-    flipping_image_vertically();//if the user  choose 2 the image  will be flipped vertically
-}
+  void flip_image(){
+  int choose;//we take an integer value 1 or 2 to make the user choose between flipping the image vertically or horizantally
+  cout<<"welcome ya user ya habibi" <<endl<< "if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 : "<<endl ;
+  cin>>choose;
+  while(choose!=1 && choose!=2){ // if the user choose a number not equal to 1 or 2  this loop will make choose 1 or 2
+      cout<<"welcome ya user ya habibi "<<endl<<"if you want to flip the image horizantally choose 1 and if you want to flip the image vertically choose 2 :";
+      cin>>choose;
+  }
+  if (choose ==1){
+      flippping_image_horizantally();//if the user choose 1 the image  will be flipped horizantally
+  }
+  else if(choose == 2){
+      flippping_image_vertically();//if the user  choose 2 the image  will be flipped vertically
+  }
 
 }
 //__________________________________________________________________________________
