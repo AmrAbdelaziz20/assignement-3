@@ -1,4 +1,3 @@
-
 /*
 Program Name: Grayscale Photo Editor
 Program Purpose: Edit grayscale bitmap images
@@ -30,6 +29,7 @@ void enlargeImage();
 void shuffleImage();
 void ShrinkImage();
 void flip_image();
+void BlurImage();
 void mirror_image();
 void mirror_the_right_half_from_image();
 void mirror_the_lower_half_from_image();
@@ -47,7 +47,7 @@ int main() {
     loadImage();
     cout << "MENU:\n1- Black and White Image\n2- Invert Image\n3- Merge Image\n";
     cout << "4-Flip Image\n5- Rotate Image\n6- Darken and Lighten Image\n7- Detect Image Edges\n";
-    cout << "8- Enlarge Image\n9- Shrink Image\na- Mirror Image\nb- Shuffle Image\n";
+    cout << "8- Enlarge Image\n9- Shrink Image\na- Mirror Image\nb- Shuffle Image\nc- Blur Image";
     cout << "Please enter the index of the desired operation: ";
 
 
@@ -91,6 +91,9 @@ int main() {
           break;
         case 'b':
           shuffleImage();
+          break;
+        case 'c':
+          BlurImage();
           break;
         default:
           // defending against bad input
@@ -589,13 +592,10 @@ void ShrinkImage(){
 //__________________________________________________________________________________
 // Next filter is Blur image
 void BlurImage(){
-    for (int i = 0 ; i < SIZE ; i++){
-        for (int j = 0 ; j < SIZE ; j++){
-
-                    //adding adjacent pixels in one pixel
-            image[i][j] = (image[i][j] + image[i+1][j] + image[i][j+1] + image[i+1][j+1] + image[i-1][j] + image[i][j-1] + image[i-1][j-1] + image[i+2][j] + image[i][j+2] + image[i+2][j+2] + image[i-2][j] + image[i][j-2] + image[i-2][j-2] + image[i+3][j] + image[i][j+3] + image[i+3][j+3] + image[i-3][j] + image[i][j-3] + image[i-3][j-3]) / 19;
-
-
-        }
+  for (int i = 0 ; i < SIZE ; i++){
+    for (int j = 0 ; j < SIZE ; j++){
+      //adding adjacent pixels in one pixel
+      image[i][j] = (image[i][j] + image[i+1][j] + image[i][j+1] + image[i+1][j+1] + image[i-1][j] + image[i][j-1] + image[i-1][j-1] + image[i+2][j] + image[i][j+2] + image[i+2][j+2] + image[i-2][j] + image[i][j-2] + image[i-2][j-2] + image[i+3][j] + image[i][j+3] + image[i+3][j+3] + image[i-3][j] + image[i][j-3] + image[i-3][j-3]) / 19;
     }
+  }
 }

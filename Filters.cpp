@@ -11,12 +11,8 @@ Presented to: Dr. Mohamed El Ramly
 Teaching Assistant: Eng. Abdulrahman Abdulmonem
 */
 
-#include <iostream>
-#include <fstream>
-#include <cstring>
-#include <cmath>
+#include <bits/stdc++.h>
 #include "bmplib.cpp"
-#include <string>
 
 
 using namespace std;
