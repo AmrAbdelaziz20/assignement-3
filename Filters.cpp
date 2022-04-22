@@ -1,5 +1,5 @@
 /*
-Program Name: Grayscale Photo Editor
+Program Name: RGB Photo Editor
 Program Purpose: Edit RGB bitmap images
 Version: 1.2
 Last Modification Date: 19/4/2022
