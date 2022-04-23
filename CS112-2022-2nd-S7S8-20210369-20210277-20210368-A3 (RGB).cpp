@@ -21,6 +21,9 @@ unsigned char new_image[SIZE][SIZE];
 unsigned char image2 [SIZE][SIZE][RGB];
 void loadImage();
 void saveImage();
+void saveimage_for_black_and_white();
+void makethephotoblackandwhite();
+void saveImage2();
 void invertImage();
 void rotateImage();
 void blackandwhiteImage();
@@ -410,10 +413,10 @@ void BlurImage(){
       cin>>choose;
   }
   if (choose ==1){
-      flippping_image_horizantally();//if the user choose 1 the image  will be flipped horizantally
+      flipping_image_horizantally();//if the user choose 1 the image  will be flipped horizantally
   }
   else if(choose == 2){
-      flippping_image_vertically();//if the user  choose 2 the image  will be flipped vertically
+      flipping_image_vertically();//if the user  choose 2 the image  will be flipped vertically
   }
 
 }
