@@ -27,7 +27,7 @@ void saveImage2();
 void invertImage();
 void rotateImage();
 void blackandwhiteImage();
-void detectEdges();
+void detect_image_edges()
 void Mergeimage();
 void DarkenandLighten();
 void enlargeImage();
@@ -66,7 +66,7 @@ int main() {
       switch (choice)
       {
         case '1':
-          blackandwhiteImage();
+          makethephotoblackandwhite()
           saveimage_for_black_and_white();
           break;
         case '2':
@@ -91,7 +91,7 @@ int main() {
           break;
         case '7':
           makethephotoblackandwhite();
-          detectEdges();
+          detect_image_edges()
           saveImage();
           break;
         case '8':
