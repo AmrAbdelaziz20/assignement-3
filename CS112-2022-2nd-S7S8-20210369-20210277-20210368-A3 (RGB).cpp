@@ -27,7 +27,7 @@ void saveImage2();
 void invertImage();
 void rotateImage();
 void blackandwhiteImage();
-void detect_image_edges()
+void detect_image_edges();
 void Mergeimage();
 void DarkenandLighten();
 void enlargeImage();
@@ -48,7 +48,7 @@ int main() {
   while (true)
   {
     // listing the photos available in the same directory as the source code
-    cout << "List of names of the available image files:\ncrowd / elephant / fruit / house / photographer\n";
+    cout << "List of names of the available image files:\mario / parots\n";
     // loading the image into a 2d array
     loadImage();
     cout << "MENU:\n1- Black and White Image\n2- Invert Image\n3- Merge Image\n";
@@ -66,7 +66,7 @@ int main() {
       switch (choice)
       {
         case '1':
-          makethephotoblackandwhite()
+          makethephotoblackandwhite();
           saveimage_for_black_and_white();
           break;
         case '2':
@@ -91,7 +91,7 @@ int main() {
           break;
         case '7':
           makethephotoblackandwhite();
-          detect_image_edges()
+          detect_image_edges();
           saveImage();
           break;
         case '8':
