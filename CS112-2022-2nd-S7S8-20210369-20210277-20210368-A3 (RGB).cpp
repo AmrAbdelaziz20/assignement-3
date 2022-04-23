@@ -420,4 +420,213 @@ void BlurImage(){
   }
 
 }
+//_________________________________________
+void invertImage() {
+  // making black pixels white and vice versa
+    for (int k = 0; k < RGB; k++){
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+            image[i][j][k] = abs(image[i][j][k] - 255);
+            }
+        }
+    }
+}
+
+//_________________________________________
+void rotateImage() {
+  int deg;
+  cout << "Please enter the degree with which you want to rotate the image: ";
+  while (true){
+    bool isInvalid = false;
+    cin.ignore();
+    cin >> deg;
+    switch (deg)
+    {
+      case 90:
+      // rotating the image 180 degrees by swapping the value of the current row
+      // with the corresponding row in the end of the image
+        for (int k = 0; k < RGB; k++){
+            for (int i = 0; i < SIZE / 2; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    swap(image[i][j][k], image[255-i][j][k]);
+                }
+            }
+        }
+      // transposing the previous image matrix
+        for (int k = 0; k < RGB; k++) {
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = i; j < SIZE; j++) {
+                    swap(image[i][j][k], image[j][i][k]);
+                }
+            }
+        }
+        break;
+
+      // rotating the image 180 degrees by swapping the value of the current row
+      // with the corresponding row in the end of the image
+      case 180:
+        for (int k = 0; k < RGB; k++){
+            for (int i = 0; i < SIZE / 2; i++) {
+                for (int j = 0; j < SIZE; j++) {
+                    swap(image[i][j][k], image[255-i][j][k]);
+                }
+            }
+        }
+        break;
+
+      // transposing the original image matrix
+      case 270:
+        for (int k = 0; k < RGB; k++) {
+            for (int i = 0; i < SIZE; i++) {
+                for (int j = i; j < SIZE; j++) {
+                    swap(image[i][j][k], image[j][i][k]);
+                }
+            }
+        }
+        break;
+
+      default:
+      cout << "Invalid degree of rotation. Please enter a valid rotation degree: ";
+      isInvalid = true;
+      break;
+    }
+    if (isInvalid){
+      continue;
+    }
+    else{
+      break;
+    }
+  }
+}
+
+//_________________________________________
+void enlargeImage() {
+  int choice, starti, startj, endi, endj;
+  while (true) {
+    bool isUnavailable = false;
+    // asking the user to input the quad order
+    cout << "Please enter the order of the quad you want to enlarge 1, 2, 3 or 4: ";
+    cin.ignore();
+    cin >> choice;
+    // detecting the start and end coordinates based on the user's input
+    switch (choice)
+    {
+      case 1:
+        starti = startj = 0;
+        endi = endj = SIZE / 2;
+      break;
+
+      case 2:
+        starti = 0;
+        startj = endi = SIZE / 2;
+        endj = SIZE;
+        break;
+
+      case 3:
+        startj = 0;
+        starti = endj = SIZE / 2;
+        endi = SIZE;
+        break;
+
+      case 4:
+        starti = startj = SIZE / 2;
+        endi = endj = SIZE;
+        break;
+
+      // checking for bad input
+      default:
+        cout << "Invalid quad order. Please enter a valid order: ";
+        isUnavailable = true;
+        break;
+    }
+
+    if (isUnavailable) {
+      continue;
+    }
+    else {
+      break;
+    }
+  }
+
+  // applying the nearest neighbor algorithm by copying the quad into a temporary image and zooming in by a 4x scale
+  for (int k = 0; k < RGB; k++) {
+    for (int i = starti, x = 0 ; i < endi; i++, x+=2){
+        for (int j = startj, l = 0 ; j < endj; j++, l+=2){
+        image2[x][l][k] = image2[x][l+1][k] = image2[x+1][l][k] = image2[x+1][l+1][k] = image[i][j][k];
+        }
+    }
+  }
+
+  // overwriting the original image with the enlarged image
+  for (int i = 0; i < SIZE; i++) {
+    for (int j = 0; j < SIZE; j++) {
+      swap(image[i][j], image2[i][j]);
+    }
+  }
+}
+
+//_________________________________________
+void shuffleImage() {
+  string order;
+  // asking the user for the shuffle order
+  cout << "Please enter the order of the shuffled image in the format n1 n2 n3 n4 , n = {1,2,3,4} : ";
+  cin.ignore();
+  getline(cin, order);
+  // removing spaces
+  regex r (" ");
+  order = regex_replace(order, r, "");
+
+  int starti, endi;
+  int startj, endj;
+  // looping 4 times to apply the 4-quad shuffle
+  for (int ltr = 0; ltr < 4; ltr++) {
+    // detecting the start and end coordinates based on the user's input
+    switch (order[ltr])
+    {
+    case '1':
+      starti = startj = 0;
+      endi = endj = SIZE / 2;
+      break;
+
+    case '2':
+      starti = 0;
+      startj = endi = SIZE / 2;
+      endj = SIZE;
+      break;
+
+    case '3':
+      startj = 0;
+      starti = endj = SIZE / 2;
+      endi = SIZE;
+      break;
+
+    case '4':
+      starti = startj = SIZE / 2;
+      endi = endj = SIZE;
+      break;
+    }
+
+    // detecting the beginning and ending of the temporary image based on the iteration either iteration 1, 2, 3 or 4
+    int start_l[] = {0, SIZE / 2, 0, SIZE / 2};
+    int start_x[] = {0, 0, SIZE / 2, SIZE / 2};
+
+    // looping over both images and assigning the desired quad to the temporary image
+    for (int k = 0; k < RGB; k++) {
+        for (int i = starti, x = start_x[ltr]; i < endi; i++, x++) {
+            for (int j = startj, l = start_l[ltr]; j < endj; j++, l++) {
+                image2[x][l][k] = image[i][j][k];
+            }
+        }
+    }
+  }
+
+  // overwriting the original image with the shuffled image
+  for (int k = 0; k < RGB; k++) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+        swap(image[i][j][k], image2[i][j][k]);
+        }
+    }
+  }
+}
 
